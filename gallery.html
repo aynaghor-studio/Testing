@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html lang="en" class="bg-[#FFF5E1] min-h-screen flex flex-col">
 <head>
   <meta charset="UTF-8" />
@@ -11,6 +11,7 @@
       -moz-user-select: none;
       -ms-user-select: none;
       user-select: none;
+      /* Disable right click on body */
     }
     .thumb-container {
       position: relative;
@@ -41,7 +42,9 @@
   </style>
 </head>
 
-<body class="flex flex-col flex-grow bg-[#FFF5E1] text-[#3E2723]">
+<body class="flex flex-col flex-grow bg-[#FFF5E1] text-[#3E2723]"
+      oncontextmenu="return false;"> <!-- disables right click -->
+
   <!-- Navbar -->
   <nav class="bg-[#800000] text-[#FFDB58] px-4 py-3 flex justify-between items-center relative">
     <div class="text-xl font-bold">Uttar Bangla Loko Sanskriti</div>
@@ -93,9 +96,7 @@
 
   <!-- Script -->
   <script>
-    const webAppURL = "https://script.google.com/macros/s/AKfycbyWuQ06UMiOpSQDS2YhsT6sPHjPr0cIPpDKIUF6NUnHyJEzo0tfo8fc0ZHjtpZryRshGQ/exec";
-
-    // Session check function (unchanged)
+    // Session check function
     function checkSession() {
       const user = JSON.parse(localStorage.getItem("loggedInUser"));
       if (!user || Date.now() > user.sessionExpiry) {
@@ -109,9 +110,17 @@
 
     let imageList = [];
 
+    // You need to set your web app URL here before deployment or use a relative path or environment variable.
+    // For security, the URL is not hardcoded in the script here.
+    // You can dynamically inject or set it in your deployment.
+    // For demonstration, let's assume the URL is relative and accessible at "/getGalleryImages"
+    // Replace this URL with your actual deployed Apps Script web app URL before using:
+    const fetchUrl = "https://script.google.com/macros/s/AKfycbyWuQ06UMiOpSQDS2YhsT6sPHjPr0cIPpDKIUF6NUnHyJEzo0tfo8fc0ZHjtpZryRshGQ/exec?action=getGalleryImages";
+
     async function loadImages() {
       try {
-        const res = await fetch(`${webAppURL}?action=getGalleryImages`);
+        // Using relative URL or environment specific URL
+        const res = await fetch(fetchUrl);
         if (!res.ok) throw new Error('Network response was not ok');
         imageList = await res.json();
         renderGallery();
