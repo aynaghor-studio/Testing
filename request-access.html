@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Admin Access Request - Uttar Bangla loko Sanskriti</title>
+  <style>
+    /* Reset and base */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: 'Inter', Arial, sans-serif;
+      background-color: #FFF5E1;
+      color: #3E2723;
+      line-height: 1.6;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    header, footer {
+      background-color: #800000;
+      color: #FFDB58;
+      padding: 20px 10%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    header h1 {
+      flex-grow: 1;
+      font-weight: 700;
+      text-align: center;
+      margin-left: -40px; /* To center despite button */
+      font-size: 1.75rem;
+    }
+    footer p {
+      margin: 0;
+      text-align: center;
+      width: 100%;
+    }
+    main {
+      flex-grow: 1;
+      padding: 40px 10%;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      background-color: #FFF5E1;
+    }
+    iframe {
+      width: 100%;
+      max-width: 600px;
+      height: 680px;
+      border: none;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      background: white;
+    }
+    button#backBtn {
+      background: transparent;
+      border: none;
+      color: #FFDB58;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 1rem;
+      padding: 6px 10px;
+      border-radius: 4px;
+      transition: background-color 0.2s ease;
+    }
+    button#backBtn:hover {
+      background-color: rgba(255, 219, 88, 0.2);
+    }
+    button#backBtn svg {
+      width: 18px;
+      height: 18px;
+      fill: #FFDB58;
+    }
+    /* Responsive */
+    @media (max-width: 640px) {
+      main {
+        padding: 20px 5%;
+      }
+      iframe {
+        height: 720px;
+      }
+      header {
+        padding: 15px 5%;
+      }
+      header h1 {
+        font-size: 1.5rem;
+        margin-left: -32px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <button id="backBtn" title="Go Back" aria-label="Go Back">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" aria-hidden="true" focusable="false">
+        <path d="M10 2a1 1 0 00-1.707-.707l-7 7a1 1 0 000 1.414l7 7A1 1 0 0010 16.586L4.414 11H18a1 1 0 100-2H4.414L10 3.414A1 1 0 0010 2z"/>
+      </svg>
+      Back
+    </button>
+    <h1>Uttar Bangla loko Sanskriti</h1>
+  </header>
+
+  <main>
+    <iframe
+      src="https://script.google.com/macros/s/AKfycbwNZpqBcYnkor0NhEPRN5i_qFiKxa9QUALzwxcb3smdsb2vzITanSEDXkv8sqS7jQSE/exec"
+      title="Admin Access Request Form"
+      loading="lazy"
+      allowfullscreen
+    ></iframe>
+  </main>
+
+  <footer>
+    <p>© 2025 Uttar Bangla loko Sanskriti. All rights reserved.</p>
+  </footer>
+
+  <script>
+    document.getElementById('backBtn').addEventListener('click', () => {
+      if (window.history.length > 1) {
+        window.history.back();
+      } else {
+        // fallback: go to homepage or close window
+        window.location.href = '/'; // change this if you want a default page
+      }
+    });
+  </script>
+
+</body>
+</html>
