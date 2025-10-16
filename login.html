@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>📸 Client Login | আয়না ঘর</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      background-color: #cffafe; /* bg-cyan-100 */
+    }
+  </style>
+</head>
+<body class="flex items-center justify-center min-h-screen px-4">
+  <div class="bg-white w-full max-w-md p-8 rounded-xl shadow-xl text-center">
+    <h2 class="text-3xl font-bold mb-6 text-blue-500">📸 Client Login</h2>
+
+    <div class="flex flex-col gap-5">
+      <input
+        type="text"
+        id="username"
+        placeholder="Username"
+        class="p-3 border border-gray-300 rounded-md w-full focus:outline-none focus:ring-2 focus:ring-cyan-600"
+      />
+
+      <div class="relative">
+        <input
+          type="password"
+          id="password"
+          placeholder="Password"
+          class="p-3 border border-gray-300 rounded-md w-full focus:outline-none focus:ring-2 focus:ring-cyan-600"
+        />
+        <div class="mt-2 text-left">
+          <label class="text-sm text-gray-800">
+            <input type="checkbox" onclick="togglePassword()" class="mr-1" />
+            Show Password
+          </label>
+        </div>
+      </div>
+
+      <button
+        onclick="login()"
+        class="bg-teal-700 hover:bg-teal-800 text-white font-semibold py-3 rounded-md transition"
+      >
+        Login
+      </button>
+
+      <p id="error" class="text-red-600 text-sm mt-2 min-h-[1.2rem]"></p>
+    </div>
+
+    <!-- Back to Home Button -->
+    <div class="mt-10">
+      <button
+        onclick="goHome()"
+        title="Back to Home"
+        class="bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold w-14 h-14 rounded-full flex items-center justify-center mx-auto shadow"
+      >
+        ←
+      </button>
+      <p class="text-sm text-gray-800 mt-1">Back to Home</p>
+    </div>
+  </div>
+
+  <script>
+    const LOGIN_API = 'https://script.google.com/macros/s/AKfycbyut_lLy7fjILinju2GcntoE_nLaQOAog0kysEtLnoz9uRPgDTkNctvWFtr5MoPsyFFCA/exec';
+
+    async function login() {
+      const username = document.getElementById('username').value.trim();
+      const password = document.getElementById('password').value.trim();
+      const errorEl = document.getElementById('error');
+      errorEl.innerText = '';
+
+      if (!username || !password) {
+        errorEl.innerText = "Please enter both username and password.";
+        return;
+      }
+
+      try {
+        const response = await fetch(LOGIN_API, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ username, password })
+        });
+
+        const result = await response.json();
+
+        if (result.status === "success") {
+          localStorage.setItem("clientName", result.client);
+          window.location.href = "view.html";
+        } else {
+          errorEl.innerText = result.message || "Invalid login. Please try again.";
+        }
+      } catch (error) {
+        errorEl.innerText = "Login failed. Please try again.";
+        console.error("Fetch Error:", error);
+      }
+    }
+
+    function togglePassword() {
+      const pw = document.getElementById('password');
+      pw.type = pw.type === "password" ? "text" : "password";
+    }
+
+    function goHome() {
+      window.location.href = "view.html"; // Change if different home page
+    }
+  </script>
+</body>
+</html>
